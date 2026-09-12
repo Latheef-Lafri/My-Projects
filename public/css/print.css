@@ -1,0 +1,131 @@
+/* ========================================================
+   Local Tourist Day-Visit Planner and Information System
+   Print-Friendly Stylesheet: public/css/print.css
+   Activated automatically during window.print() or @media print
+   Author: Ahmed ALL (E2410186)
+   ======================================================== */
+
+@media print {
+  /* Hide non-printable interface elements */
+  .navbar,
+  .footer,
+  .mobile-toggle,
+  .toast-container,
+  .itinerary-controls,
+  .remove-stop-btn,
+  .btn-print,
+  .btn-clear-plan,
+  .btn-save-plan,
+  .filter-section,
+  .hero-search-wrapper,
+  .nav-cta {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Header for printed itinerary */
+  .print-header {
+    display: block !important;
+    border-bottom: 2px solid #000;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .print-header h1 {
+    font-size: 18pt;
+    color: #000 !important;
+    margin-bottom: 4px;
+  }
+
+  .print-header p {
+    font-size: 10pt;
+    color: #444 !important;
+  }
+
+  /* Planner items */
+  .planner-layout {
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  .itinerary-list {
+    gap: 12px !important;
+  }
+
+  .itinerary-card {
+    background: #ffffff !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+    page-break-inside: avoid;
+    padding: 12px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .itinerary-name {
+    color: #000000 !important;
+    font-size: 13pt !important;
+  }
+
+  .stop-badge {
+    background: #000000 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 11pt !important;
+  }
+
+  .itinerary-sub {
+    color: #333333 !important;
+  }
+
+  .itinerary-thumb {
+    width: 50px !important;
+    height: 50px !important;
+    border: 1px solid #ddd;
+  }
+
+  .planner-summary-panel {
+    background: #f8f9fa !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+    margin-top: 20px !important;
+    page-break-inside: avoid;
+  }
+
+  .duration-val {
+    color: #000 !important;
+  }
+
+  /* Travel tips and guidelines in print */
+  .print-notes {
+    display: block !important;
+    margin-top: 15px;
+    font-size: 9.5pt;
+    color: #333;
+    border-top: 1px dashed #aaa;
+    padding-top: 10px;
+  }
+}
+
+/* In screen mode, hide print-only header */
+@media screen {
+  .print-header,
+  .print-notes {
+    display: none;
+  }
+}
