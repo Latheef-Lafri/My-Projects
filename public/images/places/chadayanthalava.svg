@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="natureSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#bae6fd"/>
+      <stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="rockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78716c"/>
+      <stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#natureSky)"/>
+  <circle cx="680" cy="120" r="45" fill="#fde047" opacity="0.9"/>
+
+  <!-- Distant Hills -->
+  <path d="M 0,320 Q 180,240 380,300 Q 580,220 800,280 L 800,500 L 0,500 Z" fill="#4ade80" opacity="0.7"/>
+
+  <!-- Reservoir Water -->
+  <path d="M 0,330 C 250,320 500,340 800,330 L 800,500 L 0,500 Z" fill="url(#waterGrad)"/>
+
+  <!-- Foreground Scenic Rock & Trees -->
+  <path d="M 0,500 L 0,380 Q 150,340 320,380 Q 450,420 550,500 Z" fill="url(#rockGrad)"/>
+
+  <!-- Trees -->
+  <circle cx="80" cy="350" r="35" fill="#15803d"/>
+  <rect x="75" y="370" width="10" height="30" fill="#78350f"/>
+  <circle cx="160" cy="360" r="30" fill="#166534"/>
+  <rect x="156" y="380" width="8" height="25" fill="#78350f"/>
+
+  <!-- Info Overlay -->
+  <rect x="30" y="30" width="290" height="48" rx="8" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255, 255, 255, 0.2)"/>
+  <text x="45" y="60" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="16">CHADAYANTHALAVA</text>
+  <text x="45" y="72" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="600" font-size="10">NATURE &amp; PICNIC RETREAT • 18 KM</text>
+</svg>

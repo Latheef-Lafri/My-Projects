@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sunriseSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdba74"/>
+      <stop offset="35%" stop-color="#fb7185"/>
+      <stop offset="70%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="sandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#sunriseSky)"/>
+
+  <!-- Morning Sun -->
+  <circle cx="580" cy="220" r="40" fill="#fef08a" opacity="0.95"/>
+  <circle cx="580" cy="220" r="55" fill="#fef08a" opacity="0.3"/>
+
+  <!-- Ocean Horizon -->
+  <rect x="0" y="220" width="800" height="150" fill="url(#oceanGrad)"/>
+
+  <!-- Ocean Reflection -->
+  <polygon points="540,220 620,220 660,370 500,370" fill="#fef08a" opacity="0.25"/>
+
+  <!-- Surf Waves -->
+  <path d="M 0,360 Q 200,340 400,360 Q 600,380 800,360 L 800,500 L 0,500 Z" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Golden Beach Sand -->
+  <path d="M 0,375 Q 300,355 600,385 Q 700,395 800,380 L 800,500 L 0,500 Z" fill="url(#sandGrad)"/>
+
+  <!-- Traditional Outrigger Fishing Boat Silhouette -->
+  <path d="M 280,365 Q 330,380 380,365 L 370,355 L 290,355 Z" fill="#1e293b"/>
+  <line x1="330" y1="355" x2="330" y2="310" stroke="#1e293b" stroke-width="3"/>
+  <line x1="330" y1="320" x2="260" y2="365" stroke="#1e293b" stroke-width="2"/>
+  <line x1="260" y1="365" x2="250" y2="370" stroke="#1e293b" stroke-width="3"/>
+
+  <!-- Palm Tree Silhouette -->
+  <path d="M 80,500 Q 70,380 110,260" stroke="#1e293b" stroke-width="10" fill="none"/>
+  <path d="M 110,260 Q 60,240 20,260" stroke="#1e293b" stroke-width="4" fill="none"/>
+  <path d="M 110,260 Q 140,220 180,240" stroke="#1e293b" stroke-width="4" fill="none"/>
+  <path d="M 110,260 Q 120,200 110,180" stroke="#1e293b" stroke-width="4" fill="none"/>
+
+  <!-- Info Overlay -->
+  <rect x="30" y="30" width="280" height="48" rx="8" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255, 255, 255, 0.2)"/>
+  <text x="45" y="60" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="16">KALMUNAI BEACH</text>
+  <text x="45" y="72" fill="#fb923c" font-family="system-ui, sans-serif" font-weight="600" font-size="10">BEACH &amp; SUNRISE VIEW • 14 KM</text>
+</svg>

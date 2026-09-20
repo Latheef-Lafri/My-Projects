@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="placeholderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#placeholderGrad)"/>
+  <circle cx="400" cy="210" r="60" fill="#334155"/>
+  <path d="M 360,250 L 440,250 L 415,200 L 395,225 L 380,210 Z" fill="#94a3b8"/>
+  <circle cx="380" cy="190" r="12" fill="#cbd5e1"/>
+  <text x="400" y="320" fill="#f8fafc" font-family="system-ui, sans-serif" font-weight="700" font-size="22" text-anchor="middle">Local Tourist Attraction</text>
+  <text x="400" y="350" fill="#94a3b8" font-family="system-ui, sans-serif" font-weight="500" font-size="14" text-anchor="middle">Sammanthurai &amp; Surrounding Areas</text>
+</svg>

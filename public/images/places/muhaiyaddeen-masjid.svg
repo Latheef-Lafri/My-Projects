@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="60%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="masjidWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="emeraldDome" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#skyGrad2)"/>
+  <circle cx="200" cy="80" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="620" cy="100" r="2" fill="#fff" opacity="0.8"/>
+
+  <!-- Coastal Horizon Silhouette -->
+  <path d="M 0,390 Q 400,380 800,390 L 800,500 L 0,500 Z" fill="#0f172a"/>
+  
+  <!-- Mosque Structure -->
+  <rect x="250" y="220" width="300" height="170" fill="url(#masjidWhite)" rx="4"/>
+  <path d="M 330,220 Q 400,130 470,220 Z" fill="url(#emeraldDome)"/>
+  
+  <!-- Minaret -->
+  <rect x="210" y="140" width="36" height="250" fill="url(#masjidWhite)"/>
+  <path d="M 206,140 L 228,80 L 250,140 Z" fill="url(#emeraldDome)"/>
+  
+  <rect x="554" y="140" width="36" height="250" fill="url(#masjidWhite)"/>
+  <path d="M 550,140 L 572,80 L 594,140 Z" fill="url(#emeraldDome)"/>
+
+  <!-- Arch Gates -->
+  <path d="M 365,390 L 365,310 Q 400,285 435,310 L 435,390 Z" fill="#1e293b"/>
+  
+  <!-- Info Overlay -->
+  <rect x="30" y="30" width="370" height="48" rx="8" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255, 255, 255, 0.2)"/>
+  <text x="45" y="60" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="15">MUHAIYADDEEN JUMMA MASJID, KALMUNAI</text>
+  <text x="45" y="72" fill="#6ee7b7" font-family="system-ui, sans-serif" font-weight="600" font-size="10">RELIGIOUS HERITAGE • 14 KM FROM SAMMANTHURAI</text>
+</svg>
