@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attraction Details - Local Day-Visit Planner</title>
+  <meta name="description" content="Detailed visitor information, travel tips, opening times, and map coordinates for attractions near Sammanthurai.">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/print.css" media="print">
+  
+  <!-- Leaflet CSS for guaranteed interactive map fallback -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="brand-logo" id="nav-brand-logo">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+        </div>
+        <div class="brand-text">Sammanthurai <span>Visit</span></div>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu" id="btn-mobile-toggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/places.html" class="nav-link">Attractions</a></li>
+        <li>
+          <a href="/planner.html" class="nav-link">
+            Visit Planner
+            <span class="planner-badge" style="display: none;">0</span>
+          </a>
+        </li>
+        <li><a href="/map.html" class="nav-link">Overview Map</a></li>
+        <li><a href="/admin/login.html" class="nav-link">Admin Portal</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="/planner.html" class="btn btn-primary btn-sm">Build Itinerary</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <main class="container" style="padding-top: 24px;" id="place-details-container">
+    <!-- Breadcrumb & Back -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <a href="/places.html" class="btn btn-secondary btn-sm" id="btn-back-catalog">
+        ← Back to Attractions
+      </a>
+      <div id="top-plan-action"></div>
+    </div>
+
+    <!-- Details View Rendered dynamically via JS -->
+    <div id="details-render-area">
+      <div class="card" style="padding: 60px; text-align: center;">
+        <p style="color: var(--text-muted);">Loading attraction details...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 14px;">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+              </svg>
+            </div>
+            <span>Sammanthurai Visit</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            A centralized tourism guide for places within 25 km of Sammanthurai, Sri Lanka.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/places.html">Browse Attractions</a></li>
+            <li><a href="/planner.html">One-Day Visit Planner</a></li>
+            <li><a href="/map.html">Overview Map</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Academic Citation</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">
+            Prepared for ITE2953 Programming Group Project 25S2<br>
+            Ahmed ALL (E2410186)
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Admin Portal</h4>
+          <a href="/admin/login.html" class="btn btn-secondary btn-sm">Administrator Login</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span class="current-year"></span> Local Tourist Day-Visit Planner. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/storage.js"></script>
+  <script src="/js/main.js"></script>
+  <!-- Leaflet JS for resilient interactive map fallback -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/js/place-details.js"></script>
+</body>
+</html>
