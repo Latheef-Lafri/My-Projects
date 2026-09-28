@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One-Day Visit Planner - Sammanthurai, Sri Lanka</title>
+  <meta name="description" content="Build, reorder, and print your customized one-day visit itinerary for tourist attractions around Sammanthurai.">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/print.css" media="print">
+</head>
+<body>
+
+  <!-- Print-Only Header (FR-5.4 Print-Friendly Itinerary) -->
+  <div class="print-header">
+    <h1>Local Tourist Day-Visit Planner - Sammanthurai</h1>
+    <p>Custom One-Day Travel Itinerary • Generated on <span id="print-date"></span></p>
+    <p>Starting Point: Sammanthurai Town Center • Scope: Attractions within 25 km</p>
+  </div>
+
+  <!-- Public Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="brand-logo" id="nav-brand-logo">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+        </div>
+        <div class="brand-text">Sammanthurai <span>Visit</span></div>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu" id="btn-mobile-toggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/places.html" class="nav-link">Attractions</a></li>
+        <li>
+          <a href="/planner.html" class="nav-link active">
+            Visit Planner
+            <span class="planner-badge" style="display: none;">0</span>
+          </a>
+        </li>
+        <li><a href="/map.html" class="nav-link">Overview Map</a></li>
+        <li><a href="/admin/login.html" class="nav-link">Admin Portal</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <button class="btn btn-accent btn-sm btn-print" id="btn-top-print">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print Itinerary
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header Banner -->
+  <section style="padding: 40px 0 20px; background: rgba(255, 255, 255, 0.01); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+        <div>
+          <span style="color: var(--accent-amber); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Interactive Itinerary Builder</span>
+          <h1 style="font-size: 2.4rem; margin-top: 4px;">One-Day Visit Planner</h1>
+          <p style="color: var(--text-muted); font-size: 1rem; margin-top: 6px;">
+            Arrange your stops, customize your visit sequence, track total duration, and print a ready-to-go day schedule.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-secondary btn-sm" id="btn-quick-add-place">
+            + Add Attractions
+          </button>
+          <button class="btn btn-danger btn-sm btn-clear-plan" id="btn-clear-plan-action">
+            Clear Plan
+          </button>
+          <button class="btn btn-accent btn-sm btn-print" id="btn-header-print">
+            🖨️ Print Itinerary
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Planner Area (FR-5.1, FR-5.2, FR-5.3, FR-5.4) -->
+  <main class="container">
+    <div class="planner-layout">
+      <!-- Left Column: Ordered Itinerary Stops -->
+      <section class="planner-left">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h2 style="font-size: 1.3rem;">Planned Stops (<span id="stop-counter">0</span>)</h2>
+          <span style="font-size: 0.85rem; color: var(--text-dim);">Use ▲ and ▼ to reorder sequence</span>
+        </div>
+
+        <!-- Dynamic Itinerary List Container -->
+        <div class="itinerary-list" id="itinerary-stops-container">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Add Stop Quick Trigger Box -->
+        <div style="margin-top: 24px; text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border-glass); border-radius: var(--radius-md);">
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px;">Want to add more attractions around Sammanthurai?</p>
+          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm" id="btn-browse-modal-trigger">Select from Attraction List</button>
+            <a href="/places.html" class="btn btn-outline-primary btn-sm">Explore All in Catalog →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Schedule Breakdown & Totals (FR-5.4) -->
+      <aside class="planner-right">
+        <div class="planner-summary-panel">
+          <h3>Day-Visit Summary</h3>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">
+            Estimated schedule based on typical exploration times
+          </p>
+
+          <!-- Duration Meter -->
+          <div class="duration-meter">
+            <div class="duration-val" id="total-duration-display">0 hr 0 mins</div>
+            <div class="duration-lbl">Total Estimated Visit Time</div>
+          </div>
+
+          <!-- Suggested Schedule Timeline -->
+          <div style="margin-top: 20px;">
+            <h4 style="font-size: 1rem; margin-bottom: 12px; color: #fff;">Suggested Timeline (Starts 08:30 AM)</h4>
+            <div id="timeline-breakdown" style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
+              <p>Add attractions to generate a customized schedule timeline.</p>
+            </div>
+          </div>
+
+          <!-- Planner Actions -->
+          <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn btn-accent btn-print" id="btn-panel-print" style="width: 100%;">
+              🖨️ Print / Save as PDF
+            </button>
+            <button class="btn btn-secondary btn-save-plan" id="btn-share-plan" style="width: 100%;">
+              🔗 Save &amp; Generate Share Link
+            </button>
+          </div>
+
+          <div id="share-link-feedback" style="margin-top: 14px; font-size: 0.85rem; word-break: break-all;"></div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- User Guide Section (SRS Section 2.6 User Documentation) -->
+    <section id="instructions" style="margin: 60px 0 40px; padding: 36px; background: var(--bg-surface); border: 1px solid var(--border-glass); border-radius: var(--radius-lg);">
+      <h2 style="font-size: 1.5rem; margin-bottom: 16px;">How to Use the One-Day Visit Planner</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px;">
+        <div>
+          <h4 style="color: var(--primary-light); margin-bottom: 8px;">1. Adding Destinations</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+            Click <strong>+ Add to Plan</strong> on any attraction card from the home page, catalog, or attraction details page. The planner badge in the top navigation will immediately update.
+          </p>
+        </div>
+        <div>
+          <h4 style="color: var(--primary-light); margin-bottom: 8px;">2. Arranging Visit Order</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+            Use the <strong>▲ (Move Up)</strong> and <strong>▼ (Move Down)</strong> arrow buttons beside each stop to reorder your itinerary to minimize travel distance or match opening hours.
+          </p>
+        </div>
+        <div>
+          <h4 style="color: var(--primary-light); margin-bottom: 8px;">3. Saving &amp; Printing</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+            Your plan is automatically saved in your browser's local storage. Click <strong>Print Itinerary</strong> to generate a clean, printer-friendly one-page day schedule or save as PDF.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Quick Add Attraction Modal -->
+  <div class="modal-overlay" id="quick-add-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem;">Select Attractions to Add</h3>
+        <button class="modal-close" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+        <div id="modal-places-list" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-modal-done">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 14px;">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+              </svg>
+            </div>
+            <span>Sammanthurai Visit</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            A centralized tourism guide and day-visit planner for places within 25 km of Sammanthurai, Sri Lanka.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/places.html">Attractions</a></li>
+            <li><a href="/planner.html">Visit Planner</a></li>
+            <li><a href="/map.html">Overview Map</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Academic Citation</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">
+            ITE2953 Programming Group Project 25S2<br>
+            Ahmed ALL (E2410186)
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Admin Portal</h4>
+          <a href="/admin/login.html" class="btn btn-secondary btn-sm">Administrator Login</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span class="current-year"></span> Local Tourist Day-Visit Planner. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/storage.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/planner.js"></script>
+</body>
+</html>
