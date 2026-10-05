@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overview Map - Tourist Attractions Around Sammanthurai</title>
+  <meta name="description" content="Interactive overview map of tourist attractions within 25 km of Sammanthurai, Sri Lanka.">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/print.css" media="print">
+  
+  <!-- Leaflet CSS for universal interactive fallback -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="brand-logo" id="nav-brand-logo">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+        </div>
+        <div class="brand-text">Sammanthurai <span>Visit</span></div>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation menu" id="btn-mobile-toggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/places.html" class="nav-link">Attractions</a></li>
+        <li>
+          <a href="/planner.html" class="nav-link">
+            Visit Planner
+            <span class="planner-badge" style="display: none;">0</span>
+          </a>
+        </li>
+        <li><a href="/map.html" class="nav-link active">Overview Map</a></li>
+        <li><a href="/admin/login.html" class="nav-link">Admin Portal</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="/planner.html" class="btn btn-primary btn-sm">Build Itinerary</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section style="padding: 30px 0 16px; background: rgba(255, 255, 255, 0.01); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span style="color: var(--primary-light); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Geographic Exploration</span>
+          <h1 style="font-size: 2.2rem; margin-top: 4px;">Sammanthurai Attractions Map</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">
+            Overview of all tourist attractions located within the designated 25 km radius.
+          </p>
+        </div>
+        <div>
+          <a href="/places.html" class="btn btn-secondary btn-sm">View as Grid List →</a>
+        </div>
+      </div>
+
+      <!-- Quick Category Filter for Map Markers -->
+      <div class="filter-bar" id="map-category-filters" style="margin-top: 20px; padding-bottom: 0;">
+        <button class="filter-pill active" data-category="">All Markers</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Map Section (FR-4.2) -->
+  <main class="container" style="padding-top: 20px; padding-bottom: 50px;">
+    <div id="overview-map-canvas" class="map-frame" style="height: 600px;">
+      <div class="map-placeholder-fallback">
+        <div style="font-size: 2.5rem; margin-bottom: 10px;">🗺️</div>
+        <h3 style="color: #fff; margin-bottom: 6px;">Loading Overview Map...</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Initializing geospatial coordinates around Sammanthurai...</p>
+      </div>
+    </div>
+
+    <!-- Map Legend -->
+    <div style="display: flex; gap: 20px; align-items: center; justify-content: center; margin-top: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #0ea5e9; display: inline-block;"></span>
+        <span>Center: Sammanthurai Town</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+        <span>Tourist Attractions (≤ 25 km)</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="width: 20px; height: 2px; background: rgba(14, 165, 233, 0.4); display: inline-block;"></span>
+        <span>25 km Perimeter Boundary</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 14px;">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+              </svg>
+            </div>
+            <span>Sammanthurai Visit</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            A centralized tourism guide for places within 25 km of Sammanthurai, Sri Lanka.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/places.html">Attractions</a></li>
+            <li><a href="/planner.html">Visit Planner</a></li>
+            <li><a href="/map.html">Overview Map</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Academic Citation</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">
+            ITE2953 Programming Group Project 25S2<br>
+            Ahmed ALL (E2410186)
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Admin Portal</h4>
+          <a href="/admin/login.html" class="btn btn-secondary btn-sm">Administrator Login</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span class="current-year"></span> Local Tourist Day-Visit Planner. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/storage.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/js/map.js"></script>
+</body>
+</html>

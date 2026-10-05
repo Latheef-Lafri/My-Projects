@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrator Login - Local Day-Visit Planner</title>
+  <meta name="description" content="Secure administrative access to manage tourist places, categories, and information.">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px;">
+
+  <div class="card" style="max-width: 440px; width: 100%; padding: 40px; box-shadow: var(--shadow-lg);">
+    <!-- Brand Header -->
+    <div style="text-align: center; margin-bottom: 28px;">
+      <div class="brand-icon" style="margin: 0 auto 16px; width: 48px; height: 48px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h1 style="font-size: 1.6rem; margin-bottom: 6px;">Administrator Login</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        Local Tourist Day-Visit Planner and Information System (Sammanthurai)
+      </p>
+    </div>
+
+    <!-- Error Alert Box (FR-6.2) -->
+    <div id="login-error-alert" style="display: none; padding: 12px 16px; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); border-radius: var(--radius-sm); color: #fda4af; font-size: 0.9rem; margin-bottom: 20px;">
+    </div>
+
+    <!-- Login Form (FR-6.1) -->
+    <form id="admin-login-form">
+      <div class="form-group">
+        <label for="admin-email" class="form-label">Email Address <span class="required">*</span></label>
+        <input type="email" id="admin-email" class="form-input" placeholder="admin@touristplanner.local" required autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="admin-password" class="form-label">Password <span class="required">*</span></label>
+        <input type="password" id="admin-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="btn-login-submit" style="width: 100%; margin-top: 10px; padding: 12px;">
+        Secure Log In →
+      </button>
+    </form>
+
+    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-glass); text-align: center; font-size: 0.85rem; color: var(--text-dim);">
+      <p>Protected System • Authorized Administrators Only</p>
+      <div style="margin-top: 10px;">
+        <a href="/" style="color: var(--primary-light);">← Return to Public Website</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const form = document.getElementById('admin-login-form');
+      const emailInput = document.getElementById('admin-email');
+      const passwordInput = document.getElementById('admin-password');
+      const errorAlert = document.getElementById('login-error-alert');
+      const submitBtn = document.getElementById('btn-login-submit');
+
+      // Check if session expired in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('session_expired')) {
+        showError('Your administrative session has expired. Please log in again.');
+      }
+
+      // Check if already authenticated
+      try {
+        const meRes = await API.getMe();
+        if (meRes.authenticated) {
+          window.location.href = '/admin/index.html';
+          return;
+        }
+      } catch (e) {}
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!email || !password) {
+          showError('Please enter both email and password.');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying credentials...';
+
+        try {
+          const res = await API.login(email, password);
+          if (res.success) {
+            showToast('Login successful! Redirecting...', 'success');
+            setTimeout(() => {
+              window.location.href = '/admin/index.html';
+            }, 600);
+          } else {
+            showError(res.message || 'Invalid email or password.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Secure Log In →';
+          }
+        } catch (err) {
+          showError(err.message || 'Invalid email address or password.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Secure Log In →';
+        }
+      });
+
+      function showError(msg) {
+        errorAlert.textContent = msg;
+        errorAlert.style.display = 'block';
+      }
+
+      function hideError() {
+        errorAlert.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

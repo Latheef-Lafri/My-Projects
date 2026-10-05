@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Local Day-Visit Planner</title>
+  <meta name="description" content="Management portal for tourist attraction records and categories.">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+        </div>
+        <div>Admin <span>Panel</span></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#section-overview" class="sidebar-link active" id="link-nav-overview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          Dashboard Overview
+        </a>
+        <a href="#section-places" class="sidebar-link" id="link-nav-places">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Manage Places
+        </a>
+        <a href="#section-categories" class="sidebar-link" id="link-nav-categories">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          Manage Categories
+        </a>
+        <a href="/" target="_blank" class="sidebar-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          View Public Site ↗
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-user-info">
+          <div class="admin-avatar" id="admin-avatar-initial">A</div>
+          <div style="min-width: 0;">
+            <div style="font-weight: 700; color: #fff; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="admin-user-name">
+              Administrator
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="admin-user-email">
+              admin@touristplanner.local
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-admin-logout" style="width: 100%;">
+          Logout (FR-6.3)
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <h2 style="font-size: 1.25rem;">Tourism System Administration</h2>
+          <span style="font-size: 0.82rem; color: var(--text-dim);">Sammanthurai &amp; Surrounding Areas (≤ 25 km)</span>
+        </div>
+        <div>
+          <button class="btn btn-primary btn-sm" id="btn-top-add-place">
+            + Add New Place
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <!-- Overview Stats Cards -->
+        <section id="section-overview">
+          <div class="admin-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon-wrap metric-icon-blue">🏛️</div>
+              <div class="metric-data">
+                <h3 id="stat-total-places">0</h3>
+                <p>Tourist Attractions</p>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon-wrap metric-icon-emerald">🏷️</div>
+              <div class="metric-data">
+                <h3 id="stat-total-categories">0</h3>
+                <p>Attraction Categories</p>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon-wrap metric-icon-amber">📍</div>
+              <div class="metric-data">
+                <h3>25.0 km</h3>
+                <p>Project Radius Limit</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: Tourist Places Management (FR-7.1, FR-7.2, FR-7.3, FR-7.4) -->
+        <section id="section-places" class="table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size: 1.2rem;">Tourist Attraction Records</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">
+                Add, edit, and maintain tourism places within 25 km radius
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="admin-places-search" class="form-input" placeholder="Search places..." style="width: 200px; padding: 6px 12px; font-size: 0.85rem;">
+              <select id="admin-category-filter" class="form-select" style="width: 160px; padding: 6px 12px; font-size: 0.85rem;">
+                <option value="">All Categories</option>
+              </select>
+              <button class="btn btn-primary btn-sm" id="btn-open-add-place">
+                + Add Place
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="table-places">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">Image</th>
+                  <th>Place Name</th>
+                  <th>Category</th>
+                  <th>Distance</th>
+                  <th>Hours</th>
+                  <th>Duration</th>
+                  <th style="text-align: right; width: 140px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-places">
+                <tr>
+                  <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-muted);">
+                    Loading tourist place records...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 2: Categories Management (FR-8.1, FR-8.2, FR-8.3) -->
+        <section id="section-categories" class="table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size: 1.2rem;">Attraction Categories</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">
+                Categories used to classify and filter local attractions
+              </p>
+            </div>
+            <div>
+              <button class="btn btn-primary btn-sm" id="btn-open-add-cat">
+                + Add Category
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="table-categories">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">ID</th>
+                  <th>Category Name</th>
+                  <th>Assigned Attractions</th>
+                  <th style="text-align: right; width: 160px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-categories">
+                <tr>
+                  <td colspan="4" style="text-align: center; padding: 30px; color: var(--text-muted);">
+                    Loading categories...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Tourist Place (FR-7.1, FR-7.2, FR-7.4) -->
+  <div class="modal-overlay" id="modal-place-form">
+    <div class="modal-content" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 id="modal-place-title">Add New Tourist Place</h3>
+        <button class="modal-close" id="btn-close-place-modal">&times;</button>
+      </div>
+      <form id="form-manage-place">
+        <input type="hidden" id="place-form-id">
+        <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+          <div id="place-modal-errors" style="display: none; padding: 12px; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); border-radius: var(--radius-sm); color: #fda4af; font-size: 0.88rem; margin-bottom: 16px;"></div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="place-name-input" class="form-label">Place Name <span class="required">*</span></label>
+              <input type="text" id="place-name-input" class="form-input" required placeholder="e.g. Sammanthurai Grand Masjid">
+            </div>
+            <div class="form-group">
+              <label for="place-category-input" class="form-label">Category <span class="required">*</span></label>
+              <select id="place-category-input" class="form-select" required></select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="place-location-input" class="form-label">Location / Address <span class="required">*</span></label>
+            <input type="text" id="place-location-input" class="form-input" required placeholder="e.g. Hijra Road, Sammanthurai">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="place-distance-input" class="form-label">Distance from Sammanthurai (km) <span class="required">*</span></label>
+              <input type="number" id="place-distance-input" class="form-input" step="0.1" min="0" max="25.0" required placeholder="1.0">
+              <div class="form-hint">Must be ≤ 25.0 km radius</div>
+            </div>
+            <div class="form-group">
+              <label for="place-opening-input" class="form-label">Opening Time</label>
+              <input type="text" id="place-opening-input" class="form-input" placeholder="06:00 AM">
+            </div>
+            <div class="form-group">
+              <label for="place-closing-input" class="form-label">Closing Time</label>
+              <input type="text" id="place-closing-input" class="form-input" placeholder="06:00 PM">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="place-duration-input" class="form-label">Est. Duration (Minutes)</label>
+              <input type="number" id="place-duration-input" class="form-input" min="15" step="15" value="60">
+            </div>
+            <div class="form-group">
+              <label for="place-lat-input" class="form-label">Latitude</label>
+              <input type="number" id="place-lat-input" class="form-input" step="0.0000001" placeholder="7.3615">
+            </div>
+            <div class="form-group">
+              <label for="place-lng-input" class="form-label">Longitude</label>
+              <input type="number" id="place-lng-input" class="form-input" step="0.0000001" placeholder="81.8025">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="place-image-input" class="form-label">Image URL / Path</label>
+            <input type="text" id="place-image-input" class="form-input" placeholder="/images/places/sammanthurai-grand-masjid.svg">
+          </div>
+
+          <div class="form-group">
+            <label for="place-description-input" class="form-label">Description <span class="required">*</span></label>
+            <textarea id="place-description-input" class="form-textarea" required placeholder="Detailed historical, cultural, or natural description..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="place-tips-input" class="form-label">Travel Tips (FR-3.1)</label>
+            <textarea id="place-tips-input" class="form-textarea" style="min-height: 70px;" placeholder="Best time to visit, clothing advice, route suggestions..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="place-guidelines-input" class="form-label">Visitor Guidelines &amp; Etiquette (FR-3.3)</label>
+            <textarea id="place-guidelines-input" class="form-textarea" style="min-height: 70px;" placeholder="Cultural dress rules, photography permission, waste disposal..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-cancel-place">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn-save-place">Save Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Category (FR-8.1, FR-8.2) -->
+  <div class="modal-overlay" id="modal-category-form">
+    <div class="modal-content" style="max-width: 460px;">
+      <div class="modal-header">
+        <h3 id="modal-cat-title">Add Attraction Category</h3>
+        <button class="modal-close" id="btn-close-cat-modal">&times;</button>
+      </div>
+      <form id="form-manage-category">
+        <input type="hidden" id="category-form-id">
+        <div class="modal-body">
+          <div id="cat-modal-errors" style="display: none; padding: 10px; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); border-radius: var(--radius-sm); color: #fda4af; font-size: 0.88rem; margin-bottom: 14px;"></div>
+          
+          <div class="form-group">
+            <label for="category-name-input" class="form-label">Category Name <span class="required">*</span></label>
+            <input type="text" id="category-name-input" class="form-input" required placeholder="e.g. Wildlife, Eco-Tourism">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-cancel-cat">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn-save-cat">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal (FR-7.3, FR-8.3) -->
+  <div class="modal-overlay" id="modal-delete-confirm">
+    <div class="modal-content" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 style="color: #fda4af;">Confirm Deletion</h3>
+        <button class="modal-close" id="btn-close-del-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="delete-prompt-text" style="color: var(--text-main); font-size: 0.95rem; line-height: 1.5;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" id="btn-cancel-delete">Cancel</button>
+        <button type="button" class="btn btn-danger btn-sm" id="btn-confirm-delete">Delete Permanently</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
