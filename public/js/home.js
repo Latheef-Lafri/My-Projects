@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (err) {
       console.error('Failed to load places:', err);
       placesGrid.innerHTML = `
-        <div class="card" style="padding: 40px; text-align: center; grid-column: 1 / -1; border-color: rgba(244, 63, 94, 0.4);">
-          <p style="color: #fda4af;">Failed to load tourist attractions. Please check server connection.</p>
+        <div class="card" style="padding: 40px; text-align: center; grid-column: 1 / -1; border-color: #fca5a5; background-color: var(--danger-light);">
+          <p style="color: var(--danger);">Failed to load tourist attractions. Please check server connection.</p>
         </div>
       `;
     }
@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inPlan = PlanStorage.isInPlan(place.place_id);
     const imgUrl = place.image_url || '/images/places/placeholder.svg';
     const durationFormatted = PlanStorage.formatDuration(place.estimated_duration_minutes || 60);
+    const hoursFormatted = (place.opening_time && place.closing_time)
+      ? `${escapeHtml(place.opening_time)} – ${escapeHtml(place.closing_time)}`
+      : 'Daylight visit';
 
     return `
       <div class="card place-card" id="place-card-${place.place_id}">
@@ -127,32 +130,24 @@ document.addEventListener('DOMContentLoaded', async () => {
           <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(place.place_name)}" class="place-card-image" loading="lazy">
           <span class="place-category-badge">${escapeHtml(place.category_name)}</span>
           <span class="place-distance-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
             ${place.distance_km} km
           </span>
         </div>
         <div class="place-card-body">
           <h3 class="place-card-title">${escapeHtml(place.place_name)}</h3>
           <div class="place-card-location">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            ${escapeHtml(place.location)}
+            📍 ${escapeHtml(place.location || 'Sammanthurai')}
           </div>
           <p class="place-card-desc">${escapeHtml(place.description)}</p>
           <div class="place-card-meta">
-            <span>⏱️ Visit: ~${durationFormatted}</span>
-            <span>🕒 ${escapeHtml(place.opening_time)} - ${escapeHtml(place.closing_time)}</span>
+            <span><strong>Visit:</strong> ~${durationFormatted}</span>
+            <span><strong>Hours:</strong> ${hoursFormatted}</span>
           </div>
           <div class="place-card-actions">
             <a href="/place-details.html?id=${place.place_id}" class="btn btn-secondary btn-sm" id="btn-view-details-${place.place_id}">
-              Details
+              View Details
             </a>
-            <button class="btn ${inPlan ? 'btn-outline-primary' : 'btn-secondary'} btn-sm btn-add-plan" 
+            <button class="btn ${inPlan ? 'btn-outline-primary' : 'btn-primary'} btn-sm btn-add-plan" 
                     data-id="${place.place_id}" 
                     id="btn-plan-${place.place_id}">
               ${inPlan ? '✓ In Plan' : '+ Add to Plan'}
@@ -169,12 +164,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       const id = parseInt(btn.dataset.id, 10);
       if (PlanStorage.isInPlan(id)) {
         btn.innerHTML = '✓ In Plan';
-        btn.classList.remove('btn-secondary');
+        btn.classList.remove('btn-primary');
         btn.classList.add('btn-outline-primary');
       } else {
         btn.innerHTML = '+ Add to Plan';
         btn.classList.remove('btn-outline-primary');
-        btn.classList.add('btn-secondary');
+        btn.classList.add('btn-primary');
       }
     });
   });

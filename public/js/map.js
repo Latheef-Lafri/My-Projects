@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (mapCanvas) {
       mapCanvas.innerHTML = `
         <div class="map-placeholder-fallback">
-          <p style="color: #fda4af;">Unable to load map data. Please check connection.</p>
+          <p style="color: var(--danger); font-weight: 500;">Unable to load map data. Please check connection.</p>
         </div>
       `;
     }

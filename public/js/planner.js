@@ -303,14 +303,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalPlacesList.innerHTML = places.map(p => {
           const inPlan = PlanStorage.isInPlan(p.place_id);
           return `
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg-surface-elevated); border-radius: var(--radius-sm); gap: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background-color: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); gap: 12px;">
               <div>
-                <strong style="color: #fff; font-size: 0.95rem;">${escapeHtml(p.place_name)}</strong>
-                <div style="font-size: 0.82rem; color: var(--text-muted);">
+                <strong style="color: var(--text-heading); font-size: 0.95rem;">${escapeHtml(p.place_name)}</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
                   ${escapeHtml(p.category_name)} • ~${p.distance_km} km • ~${PlanStorage.formatDuration(p.estimated_duration_minutes || 60)}
                 </div>
               </div>
-              <button class="btn ${inPlan ? 'btn-outline-primary' : 'btn-secondary'} btn-sm btn-modal-add" 
+              <button class="btn ${inPlan ? 'btn-outline-primary' : 'btn-primary'} btn-sm btn-modal-add" 
                       data-id="${p.place_id}" ${inPlan ? 'disabled' : ''}>
                 ${inPlan ? '✓ In Plan' : '+ Add'}
               </button>
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showToast(res.message, 'success');
                 btn.disabled = true;
                 btn.textContent = '✓ In Plan';
-                btn.classList.remove('btn-secondary');
+                btn.classList.remove('btn-primary');
                 btn.classList.add('btn-outline-primary');
                 renderItinerary();
               }
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           });
         });
       } catch (e) {
-        modalPlacesList.innerHTML = '<p style="color: #fda4af;">Failed to load attractions list.</p>';
+        modalPlacesList.innerHTML = '<p style="color: var(--danger);">Failed to load attractions list.</p>';
       }
     }
   }

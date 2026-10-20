@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     console.error('Failed to load attraction details:', err);
     container.innerHTML = `
-      <div class="card" style="padding: 50px; text-align: center; border-color: rgba(244, 63, 94, 0.4);">
-        <p style="color: #fda4af;">Failed to retrieve attraction details. Please check your connection.</p>
+      <div class="card" style="padding: 40px; text-align: center; border-color: #fca5a5; background-color: var(--danger-light);">
+        <p style="color: var(--danger);">Failed to retrieve attraction details. Please check your connection.</p>
         <a href="/places.html" class="btn btn-secondary btn-sm" style="margin-top: 14px;">Return to Attractions</a>
       </div>
     `;
@@ -69,26 +69,34 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('btn-top-add-plan').addEventListener('click', () => togglePlan(place));
     }
 
+    const hoursDisplay = (place.opening_time && place.closing_time)
+      ? `${escapeHtml(place.opening_time)} – ${escapeHtml(place.closing_time)}`
+      : 'Not specified (Daylight visit recommended)';
+    
+    const coordsDisplay = (place.latitude && place.longitude)
+      ? `${Number(place.latitude).toFixed(4)}° N, ${Number(place.longitude).toFixed(4)}° E`
+      : 'Not specified';
+
     container.innerHTML = `
-      <!-- Hero Image Banner (FR-3.2) -->
+      <!-- Place Header & Image Banner (FR-3.2) -->
       <div class="place-detail-hero">
         <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(place.place_name)}" class="place-detail-img">
-        <div class="place-detail-overlay">
-          <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+        <div class="place-detail-header">
+          <div style="display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; align-items: center;">
             <span class="place-category-badge" style="position: static;">${escapeHtml(place.category_name)}</span>
             <span class="place-distance-badge" style="position: static;">
               📍 ~${place.distance_km} km from Sammanthurai Town
             </span>
           </div>
-          <h1 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff;">
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-heading); margin-bottom: 6px;">
             ${escapeHtml(place.place_name)}
           </h1>
-          <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin-top: 6px; display: flex; align-items: center; gap: 6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <p style="color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            ${escapeHtml(place.location)}
+            ${escapeHtml(place.location || 'Sammanthurai region, Sri Lanka')}
           </p>
         </div>
       </div>
@@ -99,49 +107,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="detail-left">
           <!-- Overview & Description (FR-3.1) -->
           <div class="detail-section">
-            <h2>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-light)" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              About This Attraction
-            </h2>
-            <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.8; margin-top: 14px;">
+            <h2>About This Attraction</h2>
+            <p style="color: var(--text-main); font-size: 0.98rem; line-height: 1.7; margin-top: 10px;">
               ${escapeHtml(place.description)}
             </p>
           </div>
 
           <!-- Travel Tips (FR-3.1) -->
           <div class="detail-section">
-            <h3 style="color: var(--primary-light);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              Local Travel Tips
-            </h3>
+            <h3>Local Travel Tips</h3>
             <div class="info-box">
-              <div class="info-box-title">Important Recommendations for Day Visitors</div>
-              <p style="color: var(--text-main); font-size: 0.95rem; line-height: 1.6;">
-                ${escapeHtml(place.travel_tips || 'Carry drinking water and sun protection. Please respect the local community and environment.')}
+              <div class="info-box-title">Recommendations for Day Visitors</div>
+              <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.6;">
+                ${escapeHtml(place.travel_tips || 'Carry drinking water and sun protection. Please respect the local community and surrounding environment.')}
               </p>
             </div>
           </div>
 
           <!-- Visitor Guidelines (FR-3.3) -->
           <div class="detail-section">
-            <h3 style="color: var(--accent-amber);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                <line x1="12" y1="9" x2="12" y2="13"></line>
-                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-              </svg>
-              Visitor Guidelines &amp; Etiquette
-            </h3>
+            <h3>Visitor Guidelines &amp; Etiquette</h3>
             <div class="info-box info-box-amber">
-              <div class="info-box-title">Cultural &amp; Safety Guidelines</div>
-              <p style="color: var(--text-main); font-size: 0.95rem; line-height: 1.6;">
-                ${escapeHtml(place.visitor_guidelines || 'Maintain cleanliness and dispose of litter in designated bins. Follow site rules and local customs.')}
+              <div class="info-box-title">Cultural &amp; Site Conduct</div>
+              <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.6;">
+                ${escapeHtml(place.visitor_guidelines || 'Maintain cleanliness and dispose of litter in designated bins. Observe site rules and local customs.')}
               </p>
             </div>
           </div>
@@ -160,11 +149,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </tr>
                 <tr>
                   <td>Distance</td>
-                  <td>~${place.distance_km} km (Sammanthurai)</td>
+                  <td>~${place.distance_km} km (from Sammanthurai)</td>
                 </tr>
                 <tr>
                   <td>Opening Hours</td>
-                  <td>${escapeHtml(place.opening_time)} - ${escapeHtml(place.closing_time)}</td>
+                  <td>${hoursDisplay}</td>
                 </tr>
                 <tr>
                   <td>Est. Duration</td>
@@ -172,23 +161,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </tr>
                 <tr>
                   <td>Coordinates</td>
-                  <td>
-                    ${place.latitude && place.longitude ? `${place.latitude.toFixed(4)}° N, ${place.longitude.toFixed(4)}° E` : 'Available on request'}
-                  </td>
+                  <td>${coordsDisplay}</td>
                 </tr>
               </tbody>
             </table>
 
-            <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px;">
               <button class="btn ${inPlan ? 'btn-outline-primary' : 'btn-primary'} btn-block" id="btn-side-add-plan">
                 ${inPlan ? '✓ In Your One-Day Plan' : '+ Add to One-Day Plan'}
               </button>
               <a href="${gmapsUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
                 Open in Google Maps ↗
               </a>
             </div>
@@ -197,10 +179,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           <!-- Integrated Location Map (FR-4.1) -->
           <div class="detail-section">
             <h3>Location Map</h3>
-            <div id="place-map" class="map-frame" style="height: 320px;"></div>
-            <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 10px; display: flex; justify-content: space-between;">
+            <div id="place-map" class="map-frame" style="height: 280px;"></div>
+            <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 8px; display: flex; justify-content: space-between;">
               <span>📍 ${escapeHtml(place.place_name)}</span>
-              <a href="${gmapsUrl}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-light);">Directions ↗</a>
+              <a href="${gmapsUrl}" target="_blank" rel="noopener noreferrer">Directions ↗</a>
             </div>
           </div>
         </div>

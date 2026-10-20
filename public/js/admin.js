@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <img src="${escapeHtml(imgUrl)}" alt="" class="table-thumb">
           </td>
           <td>
-            <strong style="color: #fff; font-size: 0.95rem;">${escapeHtml(p.place_name)}</strong>
+            <strong style="font-size: 0.95rem; color: var(--text-heading);">${escapeHtml(p.place_name)}</strong>
             <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 2px;">
               📍 ${escapeHtml(p.location)}
             </div>
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <span class="badge-count">${escapeHtml(p.category_name)}</span>
           </td>
           <td>
-            <span style="font-weight: 600; color: #fff;">${p.distance_km} km</span>
+            <span style="font-weight: 600; color: var(--text-heading);">${p.distance_km} km</span>
           </td>
           <td style="font-size: 0.85rem; color: var(--text-muted);">
             ${escapeHtml(p.opening_time)} - ${escapeHtml(p.closing_time)}
@@ -255,10 +255,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         <tr id="admin-cat-row-${c.category_id}">
           <td style="color: var(--text-dim); font-weight: 600;">#${c.category_id}</td>
           <td>
-            <strong style="color: #fff; font-size: 0.95rem;">${escapeHtml(c.category_name)}</strong>
+            <strong style="font-size: 0.95rem; color: var(--text-heading);">${escapeHtml(c.category_name)}</strong>
           </td>
           <td>
-            <span class="badge-count" style="background: ${inUse ? 'rgba(16, 185, 129, 0.15)' : 'rgba(148, 163, 184, 0.15)'}; color: ${inUse ? 'var(--accent-emerald)' : 'var(--text-muted)'};">
+            <span class="badge-count" style="background-color: ${inUse ? 'var(--primary-light)' : 'var(--bg-subtle)'}; color: ${inUse ? 'var(--primary-text)' : 'var(--text-muted)'};">
               ${count} Place${count !== 1 ? 's' : ''} Assigned
             </span>
           </td>

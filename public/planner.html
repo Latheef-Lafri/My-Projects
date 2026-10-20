@@ -67,24 +67,24 @@
   </header>
 
   <!-- Page Header Banner -->
-  <section style="padding: 40px 0 20px; background: rgba(255, 255, 255, 0.01); border-bottom: 1px solid var(--border-glass);">
+  <section style="padding: 28px 0 20px; background-color: var(--bg-alt); border-bottom: 1px solid var(--border-color);">
     <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
         <div>
-          <span style="color: var(--accent-amber); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Interactive Itinerary Builder</span>
-          <h1 style="font-size: 2.4rem; margin-top: 4px;">One-Day Visit Planner</h1>
-          <p style="color: var(--text-muted); font-size: 1rem; margin-top: 6px;">
-            Arrange your stops, customize your visit sequence, track total duration, and print a ready-to-go day schedule.
+          <span style="color: var(--primary); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Itinerary Builder</span>
+          <h1 style="font-size: 1.85rem; margin-top: 4px;">One-Day Visit Planner</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">
+            Arrange stops, customize your visit sequence, track total duration, and print a ready-to-go day schedule.
           </p>
         </div>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button class="btn btn-secondary btn-sm" id="btn-quick-add-place">
             + Add Attractions
           </button>
           <button class="btn btn-danger btn-sm btn-clear-plan" id="btn-clear-plan-action">
             Clear Plan
           </button>
-          <button class="btn btn-accent btn-sm btn-print" id="btn-header-print">
+          <button class="btn btn-primary btn-sm btn-print" id="btn-header-print">
             🖨️ Print Itinerary
           </button>
         </div>
@@ -98,8 +98,8 @@
       <!-- Left Column: Ordered Itinerary Stops -->
       <section class="planner-left">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h2 style="font-size: 1.3rem;">Planned Stops (<span id="stop-counter">0</span>)</h2>
-          <span style="font-size: 0.85rem; color: var(--text-dim);">Use ▲ and ▼ to reorder sequence</span>
+          <h2 style="font-size: 1.25rem;">Planned Stops (<span id="stop-counter">0</span>)</h2>
+          <span style="font-size: 0.82rem; color: var(--text-dim);">Use ▲ and ▼ to reorder sequence</span>
         </div>
 
         <!-- Dynamic Itinerary List Container -->
@@ -108,9 +108,9 @@
         </div>
 
         <!-- Add Stop Quick Trigger Box -->
-        <div style="margin-top: 24px; text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border-glass); border-radius: var(--radius-md);">
-          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px;">Want to add more attractions around Sammanthurai?</p>
-          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <div style="margin-top: 20px; text-align: center; padding: 20px; background-color: var(--bg-alt); border: 1px dashed var(--border-color); border-radius: var(--radius-md);">
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 10px;">Want to add more attractions around Sammanthurai?</p>
+          <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
             <button class="btn btn-secondary btn-sm" id="btn-browse-modal-trigger">Select from Attraction List</button>
             <a href="/places.html" class="btn btn-outline-primary btn-sm">Explore All in Catalog →</a>
           </div>
@@ -119,29 +119,31 @@
 
       <!-- Right Column: Schedule Breakdown & Totals (FR-5.4) -->
       <aside class="planner-right">
-        <div class="planner-summary-panel">
-          <h3>Day-Visit Summary</h3>
-          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">
-            Estimated schedule based on typical exploration times
-          </p>
+        <div class="planner-sidebar-box">
+          <div class="planner-summary-header">
+            <h3>Day-Visit Summary</h3>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin-top: 3px;">
+              Calculated schedule based on typical exploration times
+            </p>
+          </div>
 
           <!-- Duration Meter -->
-          <div class="duration-meter">
+          <div class="duration-box">
             <div class="duration-val" id="total-duration-display">0 hr 0 mins</div>
             <div class="duration-lbl">Total Estimated Visit Time</div>
           </div>
 
           <!-- Suggested Schedule Timeline -->
-          <div style="margin-top: 20px;">
-            <h4 style="font-size: 1rem; margin-bottom: 12px; color: #fff;">Suggested Timeline (Starts 08:30 AM)</h4>
-            <div id="timeline-breakdown" style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
+          <div style="margin-top: 16px;">
+            <h4 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--text-heading);">Suggested Timeline (Starts 08:30 AM)</h4>
+            <div id="timeline-breakdown" style="font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px;">
               <p>Add attractions to generate a customized schedule timeline.</p>
             </div>
           </div>
 
           <!-- Planner Actions -->
-          <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;">
-            <button class="btn btn-accent btn-print" id="btn-panel-print" style="width: 100%;">
+          <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 8px;">
+            <button class="btn btn-primary btn-print" id="btn-panel-print" style="width: 100%;">
               🖨️ Print / Save as PDF
             </button>
             <button class="btn btn-secondary btn-save-plan" id="btn-share-plan" style="width: 100%;">
@@ -149,30 +151,30 @@
             </button>
           </div>
 
-          <div id="share-link-feedback" style="margin-top: 14px; font-size: 0.85rem; word-break: break-all;"></div>
+          <div id="share-link-feedback" style="margin-top: 12px; font-size: 0.82rem; word-break: break-all;"></div>
         </div>
       </aside>
     </div>
 
     <!-- User Guide Section (SRS Section 2.6 User Documentation) -->
-    <section id="instructions" style="margin: 60px 0 40px; padding: 36px; background: var(--bg-surface); border: 1px solid var(--border-glass); border-radius: var(--radius-lg);">
-      <h2 style="font-size: 1.5rem; margin-bottom: 16px;">How to Use the One-Day Visit Planner</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px;">
+    <section id="instructions" style="margin: 36px 0 30px; padding: 28px; background-color: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+      <h2 style="font-size: 1.35rem; margin-bottom: 14px;">How to Use the One-Day Visit Planner</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 16px;">
         <div>
-          <h4 style="color: var(--primary-light); margin-bottom: 8px;">1. Adding Destinations</h4>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+          <h4 style="color: var(--primary); margin-bottom: 6px;">1. Adding Destinations</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.55;">
             Click <strong>+ Add to Plan</strong> on any attraction card from the home page, catalog, or attraction details page. The planner badge in the top navigation will immediately update.
           </p>
         </div>
         <div>
-          <h4 style="color: var(--primary-light); margin-bottom: 8px;">2. Arranging Visit Order</h4>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+          <h4 style="color: var(--primary); margin-bottom: 6px;">2. Arranging Visit Order</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.55;">
             Use the <strong>▲ (Move Up)</strong> and <strong>▼ (Move Down)</strong> arrow buttons beside each stop to reorder your itinerary to minimize travel distance or match opening hours.
           </p>
         </div>
         <div>
-          <h4 style="color: var(--primary-light); margin-bottom: 8px;">3. Saving &amp; Printing</h4>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+          <h4 style="color: var(--primary); margin-bottom: 6px;">3. Saving &amp; Printing</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.55;">
             Your plan is automatically saved in your browser's local storage. Click <strong>Print Itinerary</strong> to generate a clean, printer-friendly one-page day schedule or save as PDF.
           </p>
         </div>

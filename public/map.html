@@ -56,12 +56,12 @@
   </header>
 
   <!-- Page Header -->
-  <section style="padding: 30px 0 16px; background: rgba(255, 255, 255, 0.01); border-bottom: 1px solid var(--border-glass);">
+  <section style="padding: 24px 0 16px; background-color: var(--bg-alt); border-bottom: 1px solid var(--border-color);">
     <div class="container">
       <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
         <div>
-          <span style="color: var(--primary-light); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Geographic Exploration</span>
-          <h1 style="font-size: 2.2rem; margin-top: 4px;">Sammanthurai Attractions Map</h1>
+          <span style="color: var(--primary); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Geographic Exploration</span>
+          <h1 style="font-size: 1.85rem; margin-top: 4px;">Sammanthurai Attractions Map</h1>
           <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">
             Overview of all tourist attractions located within the designated 25 km radius.
           </p>
@@ -72,34 +72,34 @@
       </div>
 
       <!-- Quick Category Filter for Map Markers -->
-      <div class="filter-bar" id="map-category-filters" style="margin-top: 20px; padding-bottom: 0;">
+      <div class="filter-bar" id="map-category-filters" style="margin-top: 16px; padding-bottom: 0;">
         <button class="filter-pill active" data-category="">All Markers</button>
       </div>
     </div>
   </section>
 
   <!-- Interactive Map Section (FR-4.2) -->
-  <main class="container" style="padding-top: 20px; padding-bottom: 50px;">
-    <div id="overview-map-canvas" class="map-frame" style="height: 600px;">
+  <main class="container" style="padding-top: 20px; padding-bottom: 40px;">
+    <div id="overview-map-canvas" class="map-frame" style="height: 560px;">
       <div class="map-placeholder-fallback">
-        <div style="font-size: 2.5rem; margin-bottom: 10px;">🗺️</div>
-        <h3 style="color: #fff; margin-bottom: 6px;">Loading Overview Map...</h3>
+        <div style="font-size: 2.2rem; margin-bottom: 8px;">🗺️</div>
+        <h3 style="color: var(--text-heading); margin-bottom: 6px;">Loading Overview Map...</h3>
         <p style="color: var(--text-muted); font-size: 0.9rem;">Initializing geospatial coordinates around Sammanthurai...</p>
       </div>
     </div>
 
     <!-- Map Legend -->
-    <div style="display: flex; gap: 20px; align-items: center; justify-content: center; margin-top: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+    <div style="display: flex; gap: 20px; align-items: center; justify-content: center; margin-top: 14px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
       <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="width: 12px; height: 12px; border-radius: 50%; background: #0ea5e9; display: inline-block;"></span>
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #1b4332; display: inline-block;"></span>
         <span>Center: Sammanthurai Town</span>
       </div>
       <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+        <span style="width: 12px; height: 12px; border-radius: 50%; background: #2d6a4f; display: inline-block;"></span>
         <span>Tourist Attractions (≤ 25 km)</span>
       </div>
       <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="width: 20px; height: 2px; background: rgba(14, 165, 233, 0.4); display: inline-block;"></span>
+        <span style="width: 20px; height: 2px; background: #2d6a4f; display: inline-block;"></span>
         <span>25 km Perimeter Boundary</span>
       </div>
     </div>
