@@ -224,3 +224,4 @@ A full mapping between SRS functional requirements FR-1.1 through FR-8.3 and imp
 - 🔒 [Administrator Guide](file:///g:/GitHub/BIT/My-Projects/docs/ADMIN_GUIDE.md)
 - 📡 [REST API Documentation](file:///g:/GitHub/BIT/My-Projects/docs/API_DOCUMENTATION.md)
 - 📋 [Requirements Traceability Matrix](file:///g:/GitHub/BIT/My-Projects/docs/REQUIREMENTS_TRACEABILITY.md)
+<!-- verified: latheef-lafri -->
