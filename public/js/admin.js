@@ -84,6 +84,38 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupPlaceModalHandlers();
   setupCategoryModalHandlers();
   setupDeleteModalHandlers();
+  setupSidebarNavigation();
+
+  function formatDurationSafe(minutes) {
+    if (typeof PlanStorage !== 'undefined' && PlanStorage && PlanStorage.formatDuration) {
+      return PlanStorage.formatDuration(minutes);
+    }
+    const m = parseInt(minutes, 10) || 60;
+    const hours = Math.floor(m / 60);
+    const mins = m % 60;
+    if (hours > 0 && mins > 0) return `${hours} hr ${mins} mins`;
+    if (hours > 0) return `${hours} hr`;
+    return `${mins} mins`;
+  }
+
+  function setupSidebarNavigation() {
+    const navLinks = document.querySelectorAll('.sidebar-nav .sidebar-link');
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+    });
+  }
 
   /**
    * Refresh all dashboard tables and metrics
@@ -151,7 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     tbodyPlaces.innerHTML = places.map(p => {
       const imgUrl = p.image_url || '/images/places/placeholder.svg';
-      const dur = PlanStorage.formatDuration(p.estimated_duration_minutes || 60);
+      const dur = formatDurationSafe(p.estimated_duration_minutes || 60);
 
       return `
         <tr id="admin-place-row-${p.place_id}">
