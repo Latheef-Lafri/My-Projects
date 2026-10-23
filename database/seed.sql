@@ -59,7 +59,7 @@ INSERT INTO `tourist_places` (
   45,
   7.3615000,
   81.8025000,
-  '/images/places/sammanthurai-grand-masjid.svg'
+'/images/places/sammanthurai-grand-masjid.jpg'
 ),
 (
   2,
@@ -75,7 +75,7 @@ INSERT INTO `tourist_places` (
   45,
   7.4168000,
   81.8294000,
-  '/images/places/muhaiyaddeen-masjid.svg'
+  '/images/places/muhaiyaddeen-masjid.jpg'
 ),
 (
   3,
@@ -91,7 +91,7 @@ INSERT INTO `tourist_places` (
   90,
   7.3480000,
   81.6750000,
-  '/images/places/chadayanthalava.svg'
+  '/images/places/chadayanthalava.jpg'
 ),
 (
   4,
