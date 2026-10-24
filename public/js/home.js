@@ -118,7 +118,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function createPlaceCardHtml(place) {
     const inPlan = PlanStorage.isInPlan(place.place_id);
-    const imgUrl = place.image_url || '/images/places/placeholder.svg';
+    // Use the image URL as provided; if it lacks the folder path, prepend it.
+    let imgUrl = place.image_url ? (place.image_url.startsWith('/images/places/') ? place.image_url : `/images/places/${place.image_url}`) : '/images/places/placeholder.svg';
+    // If the URL points to an SVG but the actual file is a JPG, replace the extension.
+    if (imgUrl.endsWith('.svg')) {
+      imgUrl = imgUrl.replace(/\.svg$/i, '.jpg');
+    }
     const durationFormatted = PlanStorage.formatDuration(place.estimated_duration_minutes || 60);
     const hoursFormatted = (place.opening_time && place.closing_time)
       ? `${escapeHtml(place.opening_time)} – ${escapeHtml(place.closing_time)}`
