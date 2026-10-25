@@ -65,8 +65,12 @@ app.use('/admin', (req, res, next) => {
   next();
 });
 
-// Serve Public Static Assets
+const uploadRoutes = require('./src/routes/uploadRoutes');
+
+// Serve Public Static Assets and Uploads Folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
+app.use('/Upload', express.static(path.join(__dirname, 'public', 'uploads')));
 
 // Mount API Endpoints
 app.use('/api/config', configRoutes);
@@ -74,6 +78,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/places', placeRoutes);
 app.use('/api/plans', planRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Health check endpoint
 app.get('/api/health', async (req, res) => {

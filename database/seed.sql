@@ -59,7 +59,7 @@ INSERT INTO `tourist_places` (
   45,
   7.3615000,
   81.8025000,
-'/images/places/sammanthurai-grand-masjid.jpg'
+'/uploads/places/sammanthurai-grand-masjid.jpg'
 ),
 (
   2,
@@ -75,7 +75,7 @@ INSERT INTO `tourist_places` (
   45,
   7.4168000,
   81.8294000,
-  '/images/places/muhaiyaddeen-masjid.jpg'
+  '/uploads/places/muhaiyaddeen-masjid.jpg'
 ),
 (
   3,
@@ -91,7 +91,7 @@ INSERT INTO `tourist_places` (
   90,
   7.3480000,
   81.6750000,
-  '/images/places/chadayanthalava.jpg'
+  '/uploads/places/chadayanthalava.jpg'
 ),
 (
   4,
@@ -107,7 +107,7 @@ INSERT INTO `tourist_places` (
   60,
   7.3850000,
   81.7820000,
-  '/images/places/painthaaru.svg'
+  '/uploads/places/painthaaru.jpg'
 ),
 (
   5,
@@ -123,7 +123,7 @@ INSERT INTO `tourist_places` (
   75,
   7.4150000,
   81.8385000,
-  '/images/places/kalmunai-beach.svg'
+  '/uploads/places/kalmunai-beach.jpg'
 ),
 (
   6,
@@ -139,7 +139,7 @@ INSERT INTO `tourist_places` (
   60,
   7.2965000,
   81.8505000,
-  '/images/places/seusl.svg'
+  '/uploads/places/seusl.jpg'
 ),
 (
   7,
@@ -155,7 +155,7 @@ INSERT INTO `tourist_places` (
   45,
   7.2885000,
   81.8670000,
-  '/images/places/oluvil-harbour.svg'
+  '/uploads/places/oluvil-harbour.jpg'
 ),
 (
   8,
@@ -171,7 +171,7 @@ INSERT INTO `tourist_places` (
   45,
   7.2892000,
   81.8680000,
-  '/images/places/oluvil-lighthouse.svg'
+  '/uploads/places/oluvil-lighthouse.jpg'
 ),
 (
   9,
@@ -187,7 +187,7 @@ INSERT INTO `tourist_places` (
   60,
   7.2930000,
   81.8640000,
-  '/images/places/oluvil-beach.svg'
+  '/uploads/places/oluvil-beach.jpg'
 ),
 (
   10,
@@ -203,7 +203,7 @@ INSERT INTO `tourist_places` (
   90,
   7.2890000,
   81.6720000,
-  '/images/places/green-park-ampara.svg'
+  '/uploads/places/green-park-ampara.JPG'
 )
 ON DUPLICATE KEY UPDATE 
   `place_name` = VALUES(`place_name`),

@@ -11,6 +11,10 @@ const router = express.Router();
 const PlaceModel = require('../models/placeModel');
 const CategoryModel = require('../models/categoryModel');
 const { requireAdmin } = require('../middleware/auth');
+const uploadRoutes = require('./uploadRoutes');
+
+// Support /api/places/upload
+router.use('/upload', uploadRoutes);
 
 // Validation helper for tourist places (FR-7.4)
 function validatePlaceInput(data) {

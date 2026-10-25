@@ -55,7 +55,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function renderPlaceDetails(place) {
     const inPlan = PlanStorage.isInPlan(place.place_id);
-    const imgUrl = place.image_url || '/images/places/placeholder.svg';
+    let imgUrl = place.image_url || '/uploads/placeholder.svg';
+    if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
+      imgUrl = `/uploads/places/${imgUrl}`;
+    }
     const durationFormatted = PlanStorage.formatDuration(place.estimated_duration_minutes || 60);
     const gmapsUrl = getGoogleMapsUrl(place.place_name, place.latitude, place.longitude, place.location);
 
@@ -80,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     container.innerHTML = `
       <!-- Place Header & Image Banner (FR-3.2) -->
       <div class="place-detail-hero">
-        <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(place.place_name)}" class="place-detail-img">
+        <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(place.place_name)}" class="place-detail-img" loading="lazy" onerror="this.onerror=null;this.src='/uploads/placeholder.svg';">
         <div class="place-detail-header">
           <div style="display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; align-items: center;">
             <span class="place-category-badge" style="position: static;">${escapeHtml(place.category_name)}</span>

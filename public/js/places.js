@@ -215,8 +215,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function createPlaceCardHtml(place) {
     const inPlan = PlanStorage.isInPlan(place.place_id);
-    // Use the image URL as provided; if it lacks the folder path, prepend it.
-    const imgUrl = place.image_url ? (place.image_url.startsWith('/images/places/') ? place.image_url : `/images/places/${place.image_url}`) : '/images/places/placeholder.svg';
+    let imgUrl = place.image_url || '/uploads/placeholder.svg';
+    if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
+      imgUrl = `/uploads/places/${imgUrl}`;
+    }
     const durationFormatted = PlanStorage.formatDuration(place.estimated_duration_minutes || 60);
     const hoursFormatted = (place.opening_time && place.closing_time)
       ? `${escapeHtml(place.opening_time)} – ${escapeHtml(place.closing_time)}`
@@ -225,7 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return `
       <div class="card place-card" id="place-card-${place.place_id}">
         <div class="place-card-image-wrap">
-          <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(place.place_name)}" class="place-card-image" loading="lazy">
+          <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(place.place_name)}" class="place-card-image" loading="lazy" onerror="this.onerror=null;this.src='/uploads/placeholder.svg';">
           <span class="place-category-badge">${escapeHtml(place.category_name)}</span>
           <span class="place-distance-badge">
             ${place.distance_km} km

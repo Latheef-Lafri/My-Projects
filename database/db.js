@@ -55,7 +55,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 45,
       latitude: 7.3615,
       longitude: 81.8025,
-      image_url: '/images/places/sammanthurai-grand-masjid.svg'
+      image_url: '/uploads/places/sammanthurai-grand-masjid.jpg'
     },
     {
       place_id: 2,
@@ -72,7 +72,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 45,
       latitude: 7.4168,
       longitude: 81.8294,
-      image_url: '/images/places/muhaiyaddeen-masjid.svg'
+      image_url: '/uploads/places/muhaiyaddeen-masjid.jpg'
     },
     {
       place_id: 3,
@@ -89,7 +89,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 90,
       latitude: 7.3480,
       longitude: 81.6750,
-      image_url: '/images/places/chadayanthalava.svg'
+      image_url: '/uploads/places/chadayanthalava.jpg'
     },
     {
       place_id: 4,
@@ -106,7 +106,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 60,
       latitude: 7.3850,
       longitude: 81.7820,
-      image_url: '/images/places/painthaaru.svg'
+      image_url: '/uploads/places/painthaaru.jpg'
     },
     {
       place_id: 5,
@@ -123,7 +123,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 75,
       latitude: 7.4150,
       longitude: 81.8385,
-      image_url: '/images/places/kalmunai-beach.svg'
+      image_url: '/uploads/places/kalmunai-beach.jpg'
     },
     {
       place_id: 6,
@@ -140,7 +140,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 60,
       latitude: 7.2965,
       longitude: 81.8505,
-      image_url: '/images/places/seusl.svg'
+      image_url: '/uploads/places/seusl.jpg'
     },
     {
       place_id: 7,
@@ -157,7 +157,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 45,
       latitude: 7.2885,
       longitude: 81.8670,
-      image_url: '/images/places/oluvil-harbour.svg'
+      image_url: '/uploads/places/oluvil-harbour.jpg'
     },
     {
       place_id: 8,
@@ -174,7 +174,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 45,
       latitude: 7.2892,
       longitude: 81.8680,
-      image_url: '/images/places/oluvil-lighthouse.svg'
+      image_url: '/uploads/places/oluvil-lighthouse.jpg'
     },
     {
       place_id: 9,
@@ -191,7 +191,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 60,
       latitude: 7.2930,
       longitude: 81.8640,
-      image_url: '/images/places/oluvil-beach.svg'
+      image_url: '/uploads/places/oluvil-beach.jpg'
     },
     {
       place_id: 10,
@@ -208,7 +208,7 @@ function initializeMockStore() {
       estimated_duration_minutes: 90,
       latitude: 7.2890,
       longitude: 81.6720,
-      image_url: '/images/places/green-park-ampara.svg'
+      image_url: '/uploads/places/green-park-ampara.JPG'
     }
   ];
 
@@ -382,7 +382,7 @@ function executeMockQuery(sql, params = []) {
       estimated_duration_minutes: parseInt(dur, 10) || 60,
       latitude: lat ? parseFloat(lat) : null,
       longitude: lng ? parseFloat(lng) : null,
-      image_url: img || '/images/places/placeholder.svg'
+      image_url: img || '/uploads/placeholder.svg'
     };
     store.places.push(newPlace);
     return { insertId: newId, affectedRows: 1 };

@@ -126,12 +126,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       const marker = L.marker([lat, lng]).addTo(leafletMap);
 
       const inPlan = PlanStorage.isInPlan(place.place_id);
-      const imgUrl = place.image_url || '/images/places/placeholder.svg';
+      const imgUrl = place.image_url || '/uploads/placeholder.svg';
       const gmapsUrl = getGoogleMapsUrl(place.place_name, lat, lng, place.location);
 
       const popupHtml = `
         <div style="min-width: 200px; max-width: 240px; font-family: sans-serif; color: #1e293b;">
-          <img src="${escapeHtml(imgUrl)}" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 6px;">
+          <img src="${escapeHtml(imgUrl)}" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 6px;" onerror="this.onerror=null;this.src='/uploads/placeholder.svg';">
           <h4 style="margin: 0 0 4px; font-size: 13px; color: #0f172a;">${escapeHtml(place.place_name)}</h4>
           <div style="font-size: 11px; color: #64748b; margin-bottom: 8px;">
             <span>${escapeHtml(place.category_name)}</span> • <span>~${place.distance_km} km</span>

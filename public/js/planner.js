@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       stopsContainer.innerHTML = plan.map((item, index) => {
         const isFirst = index === 0;
         const isLast = index === plan.length - 1;
-        const imgUrl = item.image_url || '/images/places/placeholder.svg';
+        const imgUrl = item.image_url || '/uploads/placeholder.svg';
         const durFormatted = PlanStorage.formatDuration(item.estimated_duration_minutes || 60);
 
         return `
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="stop-badge">${index + 1}</div>
 
             <!-- Thumbnail -->
-            <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(item.place_name)}" class="itinerary-thumb">
+            <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(item.place_name)}" class="itinerary-thumb" onerror="this.onerror=null;this.src='/uploads/placeholder.svg';">
 
             <!-- Information -->
             <div class="itinerary-info">

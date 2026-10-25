@@ -97,7 +97,7 @@ class PlaceModel {
       estimated_duration_minutes = 60,
       latitude = null,
       longitude = null,
-      image_url = '/images/places/placeholder.svg'
+      image_url = '/uploads/placeholder.svg'
     } = data;
 
     const sql = `
@@ -131,7 +131,7 @@ class PlaceModel {
       parseInt(estimated_duration_minutes, 10) || 60,
       latitude ? parseFloat(latitude) : null,
       longitude ? parseFloat(longitude) : null,
-      image_url ? image_url.trim() : '/images/places/placeholder.svg'
+      image_url ? image_url.trim() : '/uploads/placeholder.svg'
     ];
 
     const result = await query(sql, params);

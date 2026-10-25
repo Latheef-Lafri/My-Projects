@@ -262,9 +262,34 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="place-image-input" class="form-label">Image URL / Path</label>
-            <input type="text" id="place-image-input" class="form-input" placeholder="/images/places/sammanthurai-grand-masjid.svg">
+          <div class="form-group" style="margin-bottom: 22px;">
+            <label class="form-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span>Attraction Image <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Uploads to static Uploads folder)</span></span>
+              <span id="upload-status-badge" style="font-size: 0.75rem; color: var(--text-dim); font-weight: 500;">JPG, PNG, WebP (Max 10MB)</span>
+            </label>
+
+            <!-- Hidden field for the static upload URL -->
+            <input type="hidden" id="place-image-url" value="/uploads/placeholder.svg">
+
+            <!-- File Upload & On-Screen Live Preview Area -->
+            <div id="image-upload-dropzone" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 18px; background: var(--bg-surface); text-align: center; transition: all 0.2s ease;">
+              
+              <!-- Screen Image Preview -->
+              <div id="image-preview-wrapper" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
+                <img id="place-image-preview" src="/uploads/placeholder.svg" alt="Preview" style="max-height: 180px; max-width: 100%; border-radius: 6px; object-fit: cover; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.06);" onerror="this.onerror=null;this.src='/uploads/placeholder.svg';">
+                <div id="preview-filename" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px; word-break: break-all;">No image chosen</div>
+              </div>
+
+              <!-- Upload Actions -->
+              <div style="display: flex; justify-content: center; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <label for="place-image-file" class="btn btn-secondary btn-sm" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 7px 14px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <span>Choose Image File</span>
+                </label>
+                <input type="file" id="place-image-file" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;">
+                <button type="button" id="btn-remove-image" class="btn btn-sm" style="display: none; background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 7px 12px;">Remove Image</button>
+              </div>
+            </div>
           </div>
 
           <div class="form-group">

@@ -182,13 +182,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     tbodyPlaces.innerHTML = places.map(p => {
-      const imgUrl = p.image_url || '/images/places/placeholder.svg';
+      const imgUrl = p.image_url || '/uploads/placeholder.svg';
       const dur = formatDurationSafe(p.estimated_duration_minutes || 60);
 
       return `
         <tr id="admin-place-row-${p.place_id}">
           <td>
-            <img src="${escapeHtml(imgUrl)}" alt="" class="table-thumb">
+            <img src="${escapeHtml(imgUrl)}" alt="" class="table-thumb" onerror="this.onerror=null;this.src='/uploads/placeholder.svg';">
           </td>
           <td>
             <strong style="font-size: 0.95rem; color: var(--text-heading);">${escapeHtml(p.place_name)}</strong>
@@ -345,6 +345,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /**
    * Place Modal Setup (FR-7.1, FR-7.2, FR-7.4)
+   * Supports file upload directly to system static storage (public/uploads/places)
    */
   function setupPlaceModalHandlers() {
     const openBtns = [document.getElementById('btn-top-add-place'), document.getElementById('btn-open-add-place')];
@@ -354,6 +355,73 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('btn-close-place-modal')?.addEventListener('click', () => closePlaceModal());
     document.getElementById('btn-cancel-place')?.addEventListener('click', () => closePlaceModal());
+
+    // File input change handler - Upload immediately to static storage & preview on screen
+    const fileInput = document.getElementById('place-image-file');
+    const imagePreview = document.getElementById('place-image-preview');
+    const previewFilename = document.getElementById('preview-filename');
+    const statusBadge = document.getElementById('upload-status-badge');
+    const removeBtn = document.getElementById('btn-remove-image');
+    const hiddenUrlInput = document.getElementById('place-image-url');
+
+    fileInput?.addEventListener('change', async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      // Show immediate on-screen preview
+      const localUrl = URL.createObjectURL(file);
+      if (imagePreview) imagePreview.src = localUrl;
+      if (previewFilename) previewFilename.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+      if (statusBadge) {
+        statusBadge.textContent = 'Uploading to static storage...';
+        statusBadge.style.color = 'var(--primary, #0284c7)';
+      }
+
+      // Upload to backend /api/upload
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        if (result.success && result.imageUrl) {
+          hiddenUrlInput.value = result.imageUrl;
+          if (imagePreview) imagePreview.src = result.imageUrl;
+          if (previewFilename) previewFilename.textContent = `${result.filename} - Uploaded to static storage`;
+          if (statusBadge) {
+            statusBadge.textContent = 'Uploaded to static storage ✓';
+            statusBadge.style.color = 'var(--success, #16a34a)';
+          }
+          if (removeBtn) removeBtn.style.display = 'inline-block';
+          showToast('Image uploaded successfully to static storage.', 'success');
+        } else {
+          throw new Error(result.message || 'Image upload failed.');
+        }
+      } catch (err) {
+        if (statusBadge) {
+          statusBadge.textContent = 'Upload failed';
+          statusBadge.style.color = 'var(--danger, #dc2626)';
+        }
+        showToast(err.message || 'Failed to upload image.', 'error');
+      }
+    });
+
+    // Remove image handler
+    removeBtn?.addEventListener('click', () => {
+      if (hiddenUrlInput) hiddenUrlInput.value = '/uploads/placeholder.svg';
+      if (imagePreview) imagePreview.src = '/uploads/placeholder.svg';
+      if (previewFilename) previewFilename.textContent = 'No image selected';
+      if (fileInput) fileInput.value = '';
+      if (removeBtn) removeBtn.style.display = 'none';
+      if (statusBadge) {
+        statusBadge.textContent = 'Image removed';
+        statusBadge.style.color = 'var(--text-dim)';
+      }
+    });
 
     formManagePlace?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -372,7 +440,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         estimated_duration_minutes: parseInt(document.getElementById('place-duration-input').value, 10) || 60,
         latitude: document.getElementById('place-lat-input').value ? parseFloat(document.getElementById('place-lat-input').value) : null,
         longitude: document.getElementById('place-lng-input').value ? parseFloat(document.getElementById('place-lng-input').value) : null,
-        image_url: document.getElementById('place-image-input').value.trim() || '/images/places/placeholder.svg',
+        image_url: document.getElementById('place-image-url').value.trim() || '/uploads/placeholder.svg',
         description: document.getElementById('place-description-input').value.trim(),
         travel_tips: document.getElementById('place-tips-input').value.trim(),
         visitor_guidelines: document.getElementById('place-guidelines-input').value.trim()
@@ -419,7 +487,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('place-form-id').value = '';
     formManagePlace.reset();
     document.getElementById('place-duration-input').value = '60';
-    document.getElementById('place-image-input').value = '/images/places/placeholder.svg';
+
+    // Reset image preview & file inputs
+    const hiddenUrl = document.getElementById('place-image-url');
+    if (hiddenUrl) hiddenUrl.value = '/uploads/placeholder.svg';
+    const preview = document.getElementById('place-image-preview');
+    if (preview) preview.src = '/uploads/placeholder.svg';
+    const filenameLabel = document.getElementById('preview-filename');
+    if (filenameLabel) filenameLabel.textContent = 'No image chosen';
+    const fileInput = document.getElementById('place-image-file');
+    if (fileInput) fileInput.value = '';
+    const removeBtn = document.getElementById('btn-remove-image');
+    if (removeBtn) removeBtn.style.display = 'none';
+    const statusBadge = document.getElementById('upload-status-badge');
+    if (statusBadge) {
+      statusBadge.textContent = 'JPG, PNG, WebP (Max 10MB)';
+      statusBadge.style.color = 'var(--text-dim)';
+    }
+
     hidePlaceModalErrors();
     modalPlaceForm.classList.add('active');
   }
@@ -436,7 +521,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('place-duration-input').value = place.estimated_duration_minutes || 60;
     document.getElementById('place-lat-input').value = place.latitude || '';
     document.getElementById('place-lng-input').value = place.longitude || '';
-    document.getElementById('place-image-input').value = place.image_url || '';
+
+    // Set existing image on screen
+    const currentImg = place.image_url || '/uploads/placeholder.svg';
+    const hiddenUrl = document.getElementById('place-image-url');
+    if (hiddenUrl) hiddenUrl.value = currentImg;
+    const preview = document.getElementById('place-image-preview');
+    if (preview) preview.src = currentImg;
+    const filenameLabel = document.getElementById('preview-filename');
+    if (filenameLabel) filenameLabel.textContent = currentImg.split('/').pop();
+    const fileInput = document.getElementById('place-image-file');
+    if (fileInput) fileInput.value = '';
+    const removeBtn = document.getElementById('btn-remove-image');
+    if (removeBtn) {
+      removeBtn.style.display = (currentImg && !currentImg.includes('placeholder')) ? 'inline-block' : 'none';
+    }
+    const statusBadge = document.getElementById('upload-status-badge');
+    if (statusBadge) {
+      statusBadge.textContent = 'Saved in static storage';
+      statusBadge.style.color = 'var(--text-dim)';
+    }
+
     document.getElementById('place-description-input').value = place.description || '';
     document.getElementById('place-tips-input').value = place.travel_tips || '';
     document.getElementById('place-guidelines-input').value = place.visitor_guidelines || '';
