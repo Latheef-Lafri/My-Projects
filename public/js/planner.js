@@ -1,9 +1,4 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * One-Day Visit Planner Controller: public/js/planner.js
- * Implements FR-5.1, FR-5.2, FR-5.3, FR-5.4
- * Author: Ahmed ALL (E2410186)
- */
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const stopsContainer = document.getElementById('itinerary-stops-container');

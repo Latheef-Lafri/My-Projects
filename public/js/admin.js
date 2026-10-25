@@ -1,9 +1,3 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * Admin Dashboard Controller: public/js/admin.js
- * Implements FR-6.3, FR-7.1, FR-7.2, FR-7.3, FR-7.4, FR-8.1, FR-8.2, FR-8.3
- * Author: Ahmed ALL (E2410186)
- */
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Elements

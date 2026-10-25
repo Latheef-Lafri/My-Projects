@@ -1,9 +1,3 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * LocalStorage Manager for One-Day Visit Planner: public/js/storage.js
- * Implements FR-5.1, FR-5.2, FR-5.3, FR-5.4
- * Author: Ahmed ALL (E2410186)
- */
 
 const STORAGE_KEY = 'sammanthurai_tourist_plan_v1';
 

@@ -1,8 +1,3 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * Home Page Controller: public/js/home.js
- * Author: Ahmed ALL (E2410186)
- */
 
 document.addEventListener('DOMContentLoaded', async () => {
   const placesGrid = document.getElementById('home-places-grid');

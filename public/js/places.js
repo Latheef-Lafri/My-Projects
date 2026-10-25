@@ -1,9 +1,4 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * Attractions Catalog Controller: public/js/places.js
- * Implements FR-1.1, FR-1.2, FR-1.3, FR-2.1, FR-2.2, FR-2.3
- * Author: Ahmed ALL (E2410186)
- */
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const placesGrid = document.getElementById('places-grid');

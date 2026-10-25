@@ -1,9 +1,4 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * Overview Map Controller: public/js/map.js
- * Implements FR-4.2
- * Author: Ahmed ALL (E2410186)
- */
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const mapCanvas = document.getElementById('overview-map-canvas');

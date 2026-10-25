@@ -1,9 +1,4 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * Attraction Details Controller: public/js/place-details.js
- * Implements FR-3.1, FR-3.2, FR-3.3, FR-4.1
- * Author: Ahmed ALL (E2410186)
- */
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('details-render-area');

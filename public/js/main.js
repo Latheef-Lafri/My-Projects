@@ -1,8 +1,4 @@
-/**
- * Local Tourist Day-Visit Planner and Information System
- * Main UI Controller: public/js/main.js
- * Author: Ahmed ALL (E2410186)
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Setup mobile navigation toggle
